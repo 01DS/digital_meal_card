@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meal Card Login</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #FFB5D8, #B9A7FF, #6CA9FF);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-card {
+        background: #fff;
+        width: 350px;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+        text-align: center;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    input {
+        width: 90%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 15px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+    }
+
+    button {
+        width: 95%;
+        padding: 12px;
+        margin-top: 15px;
+        background-color: #6CA9FF;
+        color: white;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 15px;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background-color: #528ee0;
+    }
+
+    .forgot {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #666;
+        cursor: pointer;
+    }
+</style>
+</head>
+
+
+<body class="center-page">
+
+  <div class="card">
+    <h2>Login</h2>
+
+    <input id="username" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+    <p id="error"></p>
+  </div>
+
+  <script src="flogin.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Meal Card – Home</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #FFD6C0, #F8C8DC);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Top Bar */
+    .topbar {
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: 600;
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(10px);
+    }
+
+    /* Welcome Card */
+    .welcome-card {
+        background: #ffffff;
+        width: 90%;
+        max-width: 600px;
+        margin-top: 40px;
+        padding: 30px 25px;
+        border-radius: 25px;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .welcome-card h2 {
+        margin: 0;
+        font-size: 28px;
+        color: #333;
+    }
+
+    .welcome-card p {
+        margin-top: 10px;
+        color: #666;
+    }
+
+    /* Quick Buttons */
+    .button-grid {
+        margin-top: 35px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .cute-btn {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 20px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.25s;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .cute-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    /* Pastel Button Colors */
+    .mint { background: #C8F7DC; }
+    .lilac { background: #E2D7FF; }
+    .blue { background: #CFE8FF; }
+    .peach { background: #FFD7BA; }
+
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    Oda Bultum University Meal Card 
+</div>
+
+<div class="welcome-card">
+    <h2>Welcome</h2>
+    <p>Manage students, meals, and reports in one simple dashboard.</p>
+
+    <div class="button-grid">
+       <a href="#" ><button class="cute-btn mint">Add Student</button></a>
+        <a href="#"><button class="cute-btn lilac">Student List</button></a>
+      <a href="#">  <button class="cute-btn blue">Meal Scanner</button></a>
+        <button class="cute-btn peach">Generate Report</button>
+    </div>
+</div>
+
+</body>
+</html>
