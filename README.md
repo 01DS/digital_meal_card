@@ -29,4 +29,4 @@ The Digital Meal Card System is a full-stack web application developed as a univ
 This project was developed as part of a university software development course to demonstrate full-stack development, database integration, and web application design.
 
 ## 👩‍💻 Author
-Developed by Eko.
+Developed by Eku ab
