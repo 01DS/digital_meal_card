@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Student Registration</title>
+  <link rel="stylesheet" href="admin-home.css">
+  <style>
+    /* Simple form styling inside the card */
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #C0F2C0;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+    }
+    #register-btn {
+      background: #1E8449;
+      color: #fff;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    #register-btn:hover {
+      background: #28B463;
+    }
+    #qr-display {
+      margin-top: 20px;
+      text-align: center;
+    }
+    #qr-display img {
+      margin-top: 10px;
+      width: 150px;
+      height: 150px;
+    }
+    #print-btn {
+      background: #21618C;
+      color: #fff;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+      display: none;
+    }
+    #print-btn:hover {
+      background: #2E86C1;
+    }
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #qr-display,
+      #qr-display * {
+        visibility: visible;
+      }
+      #qr-display {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        text-align: center;
+      }
+      #qr-display p {
+        display: none;
+      }
+      #qr-display img {
+        width: 220px;
+        height: 220px;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">Meal Card System</div>
+    <div class="page-title">Student Registration</div>
+  </header>
+  <main class="page-content">
+  <div class="home-container">
+    <div class="home-card">
+      <h1>Student Registration</h1>
+      <p>Fill in the student details to register and generate a meal card</p>
+
+      <div class="form-group">
+        <label>Student ID</label>
+        <input type="text" id="student_id" required placeholder="" pattern="EU[0-9]{4}" title="Format: EU1234">
+      </div>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="full_name" required>
+      </div>
+      <div class="form-group">
+        <label>Department</label>
+        <input type="text" id="department" required>
+      </div>
+      <div class="form-group">
+        <label>Program</label>
+        <input type="text" id="program" required>
+      </div>
+      <div class="form-group">
+        <label>Cafeteria Status</label>
+        <select id="cafeteria_status">
+          <option value="cafeteria">Cafeteria</option>
+          <option value="non-cafeteria">Non-Cafeteria</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Year</label>
+        <input type="number" id="year" required>
+      </div>
+      <div class="form-group">
+        <label>Gender</label>
+        <select id="gender">
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel" id="phone" placeholder="" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" title="10 digits phone number">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="name@example.com">
+      </div>
+
+      <button type="button" id="register-btn" onclick="registerStudent()">Register Student</button>
+      <button type="button" id="print-btn" onclick="printQrCode()">Print QR Code</button>
+
+      <p id="error" style="color:red;margin-top:10px;"></p>
+<p id="message"></p>
+<div id="qrContainer"></div>
+
+      <div id="qr-display"></div>
+    </div>
+  </div>
+  </main>
+  <footer class="site-footer">
+    &copy; Oda Bultum University Cafeteria System
+  </footer>
+
+  <script>
+    async function registerStudent() {
+      const studentIdInput = document.getElementById("student_id");
+      const phoneInput = document.getElementById("phone");
+      const emailInput = document.getElementById("email");
+
+      let student_id = studentIdInput.value.trim().toUpperCase();
+      const full_name = document.getElementById("full_name").value;
+      const department = document.getElementById("department").value;
+      const program = document.getElementById("program").value;
+      const cafeteria_status = document.getElementById("cafeteria_status").value;
+      const year = document.getElementById("year").value;
+      const gender = document.getElementById("gender").value;
+      let phone = phoneInput.value.trim().replace(/\D/g, "");
+      const email = emailInput.value.trim();
+
+      const error = document.getElementById("error");
+      const qrDisplay = document.getElementById("qr-display");
+      const printBtn = document.getElementById("print-btn");
+      error.textContent = "";
+      qrDisplay.innerHTML = "";
+      printBtn.style.display = "none";
+
+      // Basic validation
+      if (!student_id || !full_name || !department || !program || !year) {
+        error.textContent = "Please fill in all required fields";
+        return;
+      }
+
+      if (!/^EU\d{4}$/.test(student_id)) {
+        error.textContent = "Student ID must be in the format EU1234";
+        studentIdInput.focus();
+        return;
+      }
+
+      if (phone && phone.length !== 10) {
+        error.textContent = "Phone number must be exactly 10 digits";
+        phoneInput.focus();
+        return;
+      }
+
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        error.textContent = "Please enter a valid email address";
+        emailInput.focus();
+        return;
+      }
+
+      try {
+        const res = await fetch("http://localhost:5000/api/students/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ student_id, full_name, department, program, cafeteria_status, year, gender, phone, email })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          error.textContent = data.message || "Registration failed";
+          return;
+        }
+
+        // Show QR code
+        qrDisplay.innerHTML = `
+          <p>Student registered successfully!</p>
+          <p><strong>Student ID:</strong> ${data.student.student_id}</p>
+          <p><strong>Name:</strong> ${data.student.full_name}</p>
+          <p><strong>Status:</strong> ${data.student.cafeteria_status || "cafeteria"}</p>
+          <img src="${data.mealCard.qrImage}" alt="QR Code">
+        `;
+        printBtn.style.display = "block";
+
+      } catch (err) {
+        error.textContent = "Server not reachable ";
+        printBtn.style.display = "none";
+      }
+    }
+
+    function printQrCode() {
+      const qrImage = document.querySelector("#qr-display img");
+      if (!qrImage) {
+        return;
+      }
+      window.print();
+    }
+  </script>
+</body>
+</html>

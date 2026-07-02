@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Admin Home</title>
+  <!-- Font Awesome CDN for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="admin-home.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">Meal Card System</div>
+    <div class="page-title">Admin Home</div>
+  </header>
+  <div class="logout-wrap">
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+  <main class="page-content">
+    <div class="home-container">
+      <div class="home-card">
+        <h1>Welcome</h1>
+        <p>Select an action below:</p>
+
+        <div class="home-buttons">
+          <a href="dashboard.html" class="btn"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+          <a href="studentRegistration.html" class="btn"><i class="fas fa-user-plus"></i><span>Student Registration</span></a>
+          <a href="report.html" class="btn"><i class="fas fa-file-alt"></i><span>Report Generation</span></a>
+          <a href="student-list.html" class="btn"><i class="fas fa-users"></i><span>Student List</span></a>
+          <a href="user-management.html" class="btn"><i class="fas fa-user-gear"></i><span>User Management</span></a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    &copy; Oda Bultum University Cafeteria System
+  </footer>
+  <script src="auth.js"></script>
+  <script>
+    requireRole("admin");
+  </script>
+</body>
+</html>

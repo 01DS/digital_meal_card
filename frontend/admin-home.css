@@ -1,0 +1,123 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0B2D5F; /* dark blue */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header,
+.site-footer {
+  padding: 16px 24px;
+  background: rgba(6, 59, 31, 0.85);
+  border-bottom: 1px solid #0f5132;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #d7f5d7;
+}
+
+.site-footer {
+  border-top: 1px solid #0f5132;
+  border-bottom: none;
+  justify-content: center;
+  color: #b5e3b5;
+}
+
+.brand {
+  font-weight: 700;
+  color: #1EFFA0;
+}
+
+.page-title {
+  color: #e6f7e6;
+}
+
+.page-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.home-card {
+  background: #063B1F; /* dark green-blue */
+  color: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  width: min(720px, 92vw);
+}
+
+.home-card h1 {
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+
+.home-card p {
+  margin-bottom: 30px;
+  font-size: 16px;
+  color: #C0F2C0; /* light green accent */
+}
+
+.home-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.home-buttons .btn {
+  text-decoration: none;
+  color: #fff;
+  background: #0f5132; /* deeper green */
+  padding: 18px 14px;
+  border-radius: 12px;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  font-size: 16px;
+  min-height: 96px;
+  border: 1px solid rgba(30, 132, 73, 0.6);
+}
+
+.home-buttons .btn i {
+  font-size: 22px;
+}
+
+.home-buttons .btn:hover {
+  background: #28B463;
+  transform: translateY(-2px);
+}
+.logout-wrap {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 1200;
+    }
+
+    .logout-btn {
+      width: auto;
+      margin: 0;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: none;
+      background: #ef4444;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }

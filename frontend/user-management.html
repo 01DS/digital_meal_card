@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Management - Meal Card System</title>
+  <link rel="stylesheet" href="user-management.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">Meal Card System</div>
+    <div class="page-title">User Management</div>
+  </header>
+  <main class="page-content">
+    <div class="page-container">
+      <h2>User Management</h2>
+
+      <div class="form-card">
+        <h3>Add New User</h3>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="new-username">Username</label>
+            <input id="new-username" type="text" placeholder="Username">
+          </div>
+          <div class="form-field">
+            <label for="new-email">Email</label>
+            <input id="new-email" type="email" placeholder="Email">
+          </div>
+          <div class="form-field">
+            <label for="new-password">Password</label>
+            <input id="new-password" type="password" placeholder="Password">
+          </div>
+          <div class="form-field">
+            <label for="new-role">Role</label>
+            <select id="new-role">
+              <option value="staff">Staff</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+        </div>
+        <button id="create-btn" type="button">Create User</button>
+      </div>
+
+      <div class="search-bar">
+        <label for="searchInput">Search by:</label>
+        <input id="searchInput" type="text" placeholder="Username, Email, or Role">
+      </div>
+
+      <table id="user-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Created</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Users will load here -->
+        </tbody>
+      </table>
+
+      <div id="edit-modal" class="modal hidden">
+        <div class="modal-content">
+          <h3>Update User</h3>
+          <input type="hidden" id="edit-id">
+
+          <label for="edit-username">Username</label>
+          <input id="edit-username" type="text" required>
+
+          <label for="edit-email">Email</label>
+          <input id="edit-email" type="email" required>
+
+          <label for="edit-role">Role</label>
+          <select id="edit-role">
+            <option value="staff">Staff</option>
+            <option value="admin">Admin</option>
+          </select>
+
+          <label for="edit-password">New Password (optional)</label>
+          <input id="edit-password" type="password" placeholder="Leave blank to keep current">
+
+          <div class="modal-actions">
+            <button id="save-btn" type="button">Save</button>
+            <button id="cancel-btn" type="button">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <p id="message"></p>
+    </div>
+  </main>
+  <footer class="site-footer">
+    &copy; Oda Bultum University Cafeteria System
+  </footer>
+
+  <script src="user-management.js"></script>
+</body>
+</html>

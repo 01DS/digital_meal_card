@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meal Reports</title>
+  <link rel="stylesheet" href="report.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">Meal Card System</div>
+    <div class="page-title">Meal Reports</div>
+  </header>
+  <main class="page-content">
+  <div class="container">
+    <h2>Meal Scan Reports</h2>
+
+    <div class="filters">
+      <input type="date" id="startDate">
+      <input type="date" id="endDate">
+      <button onclick="loadReports()">Filter</button>
+      <button type="button" onclick="downloadReportPdf()">Download PDF</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Meal Type</th>
+          <th>Scan Time</th>
+        </tr>
+      </thead>
+      <tbody id="reportBody"></tbody>
+    </table>
+  </div>
+  </main>
+  <footer class="site-footer">
+    &copy; Oda Bultum University Cafeteria System
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.5.29/dist/jspdf.plugin.autotable.min.js"></script>
+  <script src="report.js"></script>
+</body>
+</html>
+

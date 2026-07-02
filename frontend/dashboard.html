@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard | Meal Card System</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #020617, #0f172a);
+      font-family: "Segoe UI", sans-serif;
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .site-header {
+      padding: 20px 40px;
+      border-bottom: 1px solid #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-header h1 {
+      margin: 0;
+      color: #38bdf8;
+      font-size: 22px;
+    }
+
+    .page-content {
+      flex: 1;
+    }
+
+    .container {
+      padding: 30px 40px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .stat-card h3 {
+      margin: 0;
+      font-size: 14px;
+      color: #94a3b8;
+    }
+
+    .stat-card p {
+      margin-top: 10px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #22c55e;
+    }
+
+    .table-card {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .table-card h2 {
+      margin-top: 0;
+      color: #38bdf8;
+      font-size: 18px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #1e293b;
+      text-align: left;
+    }
+
+    th {
+      color: #94a3b8;
+      font-weight: normal;
+    }
+
+    tr:hover {
+      background: #020617;
+    }
+
+    .meal {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      text-transform: capitalize;
+    }
+
+    .breakfast { background: #22c55e; color: #020617; }
+    .lunch { background: #38bdf8; color: #020617; }
+    .dinner { background: #a855f7; color: #020617; }
+
+    .site-footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: #64748b;
+      border-top: 1px solid #1e293b;
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <h1>Admin Dashboard</h1>
+  <div>Meal Card System</div>
+</header>
+
+<main class="page-content">
+<div class="container">
+  <div class="stats">
+    <div class="stat-card">
+      <h3>Total Students</h3>
+      <p id="totalStudents">320</p>
+    </div>
+    <div class="stat-card">
+      <h3>Meals Served Today</h3>
+      <p id="mealsToday">182</p>
+    </div>
+    <div class="stat-card">
+      <h3>Active Meal Cards</h3>
+      <p id="activeCards">295</p>
+    </div>
+    <div class="stat-card">
+      <h3>Breakfast Served</h3>
+      <p id="breakfastCount">72</p>
+    </div>
+    <div class="stat-card">
+      <h3>Lunch Served</h3>
+      <p id="lunchCount">80</p>
+    </div>
+    <div class="stat-card">
+      <h3>Dinner Served</h3>
+      <p id="dinnerCount">30</p>
+    </div>
+    <div class="stat-card">
+      <h3>Cafeteria Students</h3>
+      <p id="cafeteriaCount">250</p>
+    </div>
+    <div class="stat-card">
+      <h3>Non-Cafeteria Students</h3>
+      <p id="nonCafeteriaCount">70</p>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <h2>Today's Meal Logs</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Department</th>
+          <th>Meal</th>
+          <th>Time</th>
+          <th>Staff</th>
+        </tr>
+      </thead>
+      <tbody id="mealTable">
+        <tr><td colspan="5">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</main>
+
+<footer class="site-footer">
+  &copy; Meal Card System
+</footer>
+
+<script>
+  const API_BASE = "http://127.0.0.1:5000";
+  const sampleStats = {
+    totalStudents: 320,
+    mealsToday: 182,
+    activeCards: 295,
+    mealsByType: { breakfast: 72, lunch: 80, dinner: 30 },
+    studentStatus: { cafeteria: 250, "non-cafeteria": 70 }
+  };
+
+  async function loadDashboard() {
+    const table = document.getElementById("mealTable");
+
+    try {
+      const res = await fetch(`${API_BASE}/api/admin/dashboard`);
+      if (!res.ok) throw new Error("Failed to fetch dashboard");
+
+      const data = await res.json();
+
+      document.getElementById("totalStudents").textContent = data.totalStudents;
+      document.getElementById("mealsToday").textContent = data.mealsToday;
+      document.getElementById("activeCards").textContent = data.activeCards;
+      document.getElementById("breakfastCount").textContent = data.mealsByType?.breakfast ?? 0;
+      document.getElementById("lunchCount").textContent = data.mealsByType?.lunch ?? 0;
+      document.getElementById("dinnerCount").textContent = data.mealsByType?.dinner ?? 0;
+      document.getElementById("cafeteriaCount").textContent = data.studentStatus?.cafeteria ?? 0;
+      document.getElementById("nonCafeteriaCount").textContent = data.studentStatus?.["non-cafeteria"] ?? 0;
+
+      table.innerHTML = "";
+      if (!data.logs || data.logs.length === 0) {
+        table.innerHTML = "<tr><td colspan='5'>No meal logs for today</td></tr>";
+        return;
+      }
+
+      data.logs.forEach((log) => {
+        table.innerHTML += `
+          <tr>
+            <td>${log.full_name}</td>
+            <td>${log.department}</td>
+            <td><span class="meal ${log.meal_type}">${log.meal_type}</span></td>
+            <td>${log.time}</td>
+            <td>${log.staff_id}</td>
+          </tr>
+        `;
+      });
+    } catch {
+      document.getElementById("totalStudents").textContent = sampleStats.totalStudents;
+      document.getElementById("mealsToday").textContent = sampleStats.mealsToday;
+      document.getElementById("activeCards").textContent = sampleStats.activeCards;
+      document.getElementById("breakfastCount").textContent = sampleStats.mealsByType.breakfast;
+      document.getElementById("lunchCount").textContent = sampleStats.mealsByType.lunch;
+      document.getElementById("dinnerCount").textContent = sampleStats.mealsByType.dinner;
+      document.getElementById("cafeteriaCount").textContent = sampleStats.studentStatus.cafeteria;
+      document.getElementById("nonCafeteriaCount").textContent = sampleStats.studentStatus["non-cafeteria"];
+      table.innerHTML = "<tr><td colspan='5'>Failed to load dashboard</td></tr>";
+    }
+  }
+
+  loadDashboard();
+</script>
+
+</body>
+</html>

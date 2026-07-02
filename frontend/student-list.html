@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student List - Meal Card System</title>
+  <link rel="stylesheet" href="studentl.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">Meal Card System</div>
+    <div class="page-title">Student List</div>
+  </header>
+  <main class="page-content">
+  <div class="page-container">
+    <h2>Student List</h2>
+
+    <div class="search-bar">
+      <label for="searchInput">Search by:</label>
+      <input id="searchInput" type="text" placeholder="Student ID or Name">
+    </div>
+
+    <table id="student-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Student ID</th>
+          <th>Full Name</th>
+          <th>Department</th>
+          <th>Program</th>
+          <th>Status</th>
+          <th>Year</th>
+          <th>Gender</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Students will be loaded here -->
+      </tbody>
+    </table>
+
+    <div id="edit-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Update Student</h3>
+        <input type="hidden" id="edit-id">
+
+        <label for="edit-student-id">Student ID</label>
+        <input id="edit-student-id" type="text" required placeholder="EU1234" pattern="EU[0-9]{4}" title="Format: EU1234">
+
+        <label for="edit-full-name">Full Name</label>
+        <input id="edit-full-name" type="text" required>
+
+        <label for="edit-department">Department</label>
+        <input id="edit-department" type="text" required>
+
+        <label for="edit-program">Program</label>
+        <input id="edit-program" type="text" required>
+
+        <label for="edit-status">Cafeteria Status</label>
+        <select id="edit-status">
+          <option value="cafeteria">Cafeteria</option>
+          <option value="non-cafeteria">Non-Cafeteria</option>
+          <option value="withdrawn">Withdrawn</option>
+          <option value="graduated">Graduated</option>
+        </select>
+
+        <label for="edit-year">Year</label>
+        <input id="edit-year" type="number" min="1" required>
+
+        <label for="edit-gender">Gender</label>
+        <select id="edit-gender">
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+
+        <label for="edit-phone">Phone</label>
+        <input id="edit-phone" type="tel" placeholder="10 digits" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" title="10 digits phone number">
+
+        <label for="edit-email">Email</label>
+        <input id="edit-email" type="email" placeholder="name@example.com">
+
+        <div class="modal-actions">
+          <button id="save-btn" type="button">Save</button>
+          <button id="cancel-btn" type="button">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <p id="error"></p>
+  </div>
+  </main>
+  <footer class="site-footer">
+    &copy; Oda Bultum University Cafeteria System
+  </footer>
+
+  <script src="student-list.js"></script>
+</body>
+</html>
